@@ -604,6 +604,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius);
   padding: 40px;
   box-shadow: var(--shadow-soft);
+  scroll-margin-top: 110px;
 }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
