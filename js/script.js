@@ -143,21 +143,54 @@ document.addEventListener('DOMContentLoaded', function () {
         body: new FormData(form)
       })
         .then(function (response) {
-          if (!response.ok) throw new Error('network');
-          return response.json();
+          return response.text().then(function (raw) {
+            var data = null;
+            try { data = JSON.parse(raw); } catch (parseErr) { /* FormSubmit returned a non-JSON body */ }
+
+            if (!response.ok) {
+              console.error('Kontaktformular: FormSubmit antwortete mit Fehlerstatus', response.status, raw);
+              throw new Error('http-' + response.status);
+            }
+            if (data && (data.success === false || data.success === 'false')) {
+              console.error('Kontaktformular: FormSubmit hat die Anfrage abgelehnt', data);
+              throw new Error('rejected');
+            }
+            // HTTP-Status ok und keine explizite Ablehnung -> FormSubmit hat die Anfrage angenommen,
+            // selbst wenn der Antwort-Body nicht als JSON auswertbar war.
+            return data;
+          });
         })
         .then(function () {
           statusBox.className = 'form-status success';
           statusBox.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
           form.reset();
         })
-        .catch(function () {
+        .catch(function (err) {
+          console.error('Kontaktformular: Versand fehlgeschlagen', err);
           statusBox.className = 'form-status error';
-          statusBox.textContent = 'Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an info@zinke-immo.de.';
+          statusBox.innerHTML = '<span>Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:info@zinke-immo.de">info@zinke-immo.de</a>.</span>';
         })
         .finally(function () {
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalBtnText; }
         });
+    });
+  }
+
+  /* ---------- Google Maps: click-to-load ---------- */
+  var mapLoadBtn = document.getElementById('map-load-btn');
+  if (mapLoadBtn) {
+    mapLoadBtn.addEventListener('click', function () {
+      var mapWrap = document.getElementById('map-embed');
+      if (!mapWrap) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.google.com/maps?q=Am+Berg+19,+66333+V%C3%B6lklingen&output=embed';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.title = 'Standort Zinke Immobilienverwaltung auf Google Maps';
+      iframe.setAttribute('allowfullscreen', '');
+      mapWrap.innerHTML = '';
+      mapWrap.classList.add('is-loaded');
+      mapWrap.appendChild(iframe);
     });
   }
 

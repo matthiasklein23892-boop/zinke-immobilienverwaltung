@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kontakt | Zinke Immobilienverwaltung</title>
-<meta name="description" content="Kontaktieren Sie Zinke Immobilienverwaltung für Ihre Immobilienanliegen in Völklingen – persönlich, unverbindlich, schnell.">
+<title>Kontakt | Hausverwaltung Völklingen, Saarbrücken & Saarlouis</title>
+<meta name="description" content="Kontaktieren Sie Zinke Immobilienverwaltung für Ihre Immobilie in Völklingen, Wadgassen, Saarbrücken, Saarlouis, Bous oder anderswo im Saarland – persönlich, unverbindlich, schnell.">
+<link rel="canonical" href="https://www.zinke-immo.de/kontakt.html">
 <link rel="icon" href="assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,8 +39,8 @@
   <div class="container">
     <div class="breadcrumb"><a href="index.html">Startseite</a> / <span>Kontakt</span></div>
     <div class="eyebrow">Kontaktieren Sie uns</div>
-    <h1>Für Ihre Immobilienanliegen in Völklingen</h1>
-    <p>Umfangreiches Fachwissen und persönliche Beratung – schreiben Sie uns, wir melden uns so schnell wie möglich bei Ihnen.</p>
+    <h1>Für Ihre Immobilie in Völklingen, Wadgassen, Saarbrücken, Saarlouis &amp; Bous</h1>
+    <p>Umfangreiches Fachwissen und persönliche Beratung – wir sind für Sie im gesamten Saarland erreichbar. Schreiben Sie uns, wir melden uns so schnell wie möglich bei Ihnen.</p>
   </div>
 </section>
 
@@ -67,7 +68,15 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             <div><strong>Erreichbarkeit</strong><span>Mo&ndash;Fr, 9:00&ndash;17:00 Uhr</span></div>
           </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.5 2L5 16M15 4l5.5-2L19 8M9 20l6-16M3 8l6 12"/></svg>
+            <div><strong>Einzugsgebiet</strong><span>Völklingen, Wadgassen, Saarbrücken, Saarlouis, Bous und ganz Saarland</span></div>
+          </li>
         </ul>
+        <a href="https://www.google.com/maps/search/?api=1&query=Zinke+Immobilienverwaltung+Am+Berg+19+66333+V%C3%B6lklingen" target="_blank" rel="noopener" class="btn btn--outline" style="margin-top:6px; width:100%; justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Auf Google Maps ansehen
+        </a>
         <div class="social-row">
           <a href="https://www.facebook.com/share/14e6Dbp4mTi/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l1-4h-4V7c0-1.1.4-2 2-2h2V1.2C16.6 1 15.3 1 14.2 1 11.2 1 9 2.9 9 6.4V9H6v4h3v9h4z"/></svg></a>
           <a href="https://www.instagram.com/zinke_immobilienverwaltung?igsh=eHhsZ20zb2loZHpu" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
@@ -85,6 +94,7 @@
           <input type="hidden" name="_subject" value="Neue Anfrage über das Kontaktformular – zinke-immo.de">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_autoresponse" value="Vielen Dank für Ihre Nachricht an Zinke Immobilienverwaltung! Wir haben Ihre Anfrage erhalten und melden uns so schnell wie möglich persönlich bei Ihnen zurück.">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-row">
             <div class="field">
@@ -117,8 +127,14 @@
       </div>
     </div>
 
-    <div class="map-embed reveal">
-      <span>Kartenansicht &ndash; Anschrift und Anfahrt folgen hier nach Einbindung (z.&nbsp;B. Google&nbsp;Maps/OpenStreetMap Embed).</span>
+    <div class="map-embed reveal" id="map-embed">
+      <div class="map-embed-inner" id="map-embed-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="34" height="34"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h4>Anfahrt &amp; Kartenansicht</h4>
+        <p>Am Berg 19, 66333 Völklingen – zentral erreichbar aus Wadgassen, Saarbrücken, Saarlouis, Bous und dem gesamten Saarland.</p>
+        <button type="button" class="btn btn--gold" id="map-load-btn">Karte laden</button>
+        <p class="map-embed-hint">Beim Laden wird eine Verbindung zu Google-Servern hergestellt. Es gelten die <a href="datenschutz.html">Datenschutzhinweise</a>.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -128,7 +144,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/img/logo.png" alt="Zinke Immobilienverwaltung Logo">
-        <p>Hausverwaltung. Digital. Effizient. Zukunftssicher. Persönliche Betreuung für WEG-, Miet- und Sondereigentumsverwaltung in Völklingen.</p>
+        <p>Hausverwaltung. Digital. Effizient. Zukunftssicher. Persönliche Betreuung für WEG-, Miet- und Sondereigentumsverwaltung in Völklingen, Wadgassen, Saarbrücken, Saarlouis, Bous und im gesamten Saarland.</p>
         <div class="social-row">
           <a href="https://www.facebook.com/share/14e6Dbp4mTi/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l1-4h-4V7c0-1.1.4-2 2-2h2V1.2C16.6 1 15.3 1 14.2 1 11.2 1 9 2.9 9 6.4V9H6v4h3v9h4z"/></svg></a>
           <a href="https://www.instagram.com/zinke_immobilienverwaltung?igsh=eHhsZ20zb2loZHpu" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>

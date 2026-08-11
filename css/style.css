@@ -301,6 +301,32 @@ a { color: inherit; text-decoration: none; }
 .reveal-delay-3.is-visible { transition-delay: 0.24s; }
 .reveal-delay-4.is-visible { transition-delay: 0.32s; }
 
+/* ---------- Service area tags ---------- */
+.area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.area-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--navy);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.area-tag svg { width: 18px; height: 18px; color: var(--gold-dark); flex: none; }
+.area-tag:hover { transform: translateY(-3px); border-color: var(--gold); }
+
 /* ---------- Feature / USP strip ---------- */
 .usp-strip {
   display: grid;
@@ -558,6 +584,9 @@ a { color: inherit; text-decoration: none; }
 .contact-info-list strong { display: block; color: var(--white); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; color: var(--gold-light); }
 .contact-info-list span, .contact-info-list a { color: rgba(255,255,255,0.85); }
 
+.contact-info-card .btn--outline { color: var(--white); border-color: rgba(255,255,255,0.35); }
+.contact-info-card .btn--outline:hover { background: var(--white); color: var(--navy); }
+
 .social-row { display: flex; gap: 12px; margin-top: 28px; }
 .social-row a {
   width: 42px; height: 42px;
@@ -627,7 +656,7 @@ a { color: inherit; text-decoration: none; }
 .form-status.success { display: flex; background: #e9f6ee; color: #23713f; }
 .form-status.error { display: flex; background: #fdecea; color: #b3261e; }
 
-/* ---------- Map placeholder ---------- */
+/* ---------- Map embed ---------- */
 .map-embed {
   border-radius: var(--radius);
   overflow: hidden;
@@ -641,6 +670,15 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   padding: 20px;
 }
+.map-embed.is-loaded { padding: 0; }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map-embed-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 420px; }
+.map-embed-inner svg { color: var(--gold-dark); margin-bottom: 6px; }
+.map-embed-inner h4 { font-family: var(--font-head); color: var(--navy); font-size: 1.1rem; margin: 0; }
+.map-embed-inner p { margin: 0; }
+.map-embed-inner .btn { margin: 14px 0 4px; }
+.map-embed-hint { font-size: 0.76rem; color: var(--ink-soft); opacity: 0.8; }
+.map-embed-hint a { text-decoration: underline; }
 
 /* ---------- Legal pages ---------- */
 .legal-content h2 { margin-top: 2em; font-size: 1.3rem; }
