@@ -112,8 +112,15 @@ document.addEventListener('DOMContentLoaded', function () {
       if (f) f.addEventListener('blur', function () { validateField(f); });
     });
 
+    // Nach erfolgreicher Weiterleitung von FormSubmit zeigen wir die Erfolgsmeldung an.
+    if (/[?&]gesendet=1\b/.test(window.location.search)) {
+      statusBox.className = 'form-status success';
+      statusBox.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
+      var cleanUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState(null, '', cleanUrl);
+    }
+
     form.addEventListener('submit', function (e) {
-      e.preventDefault();
       var fields = ['name', 'phone', 'email', 'message'].map(function (n) {
         return form.querySelector('[name="' + n + '"]');
       });
@@ -125,54 +132,18 @@ document.addEventListener('DOMContentLoaded', function () {
       if (consentWrap) consentWrap.style.outline = consentValid ? 'none' : '1px solid #d8534f';
 
       if (!allValid || !consentValid) {
+        e.preventDefault();
         statusBox.className = 'form-status error';
         statusBox.textContent = 'Bitte prüfen Sie Ihre Eingaben und die Datenschutz-Zustimmung.';
         return;
       }
 
+      // Eingaben sind gültig: Formular wird ganz normal an FormSubmit übertragen
+      // (kein fetch/AJAX mehr), das leitet nach Zustellung per _next zurück hierher.
       var submitBtn = form.querySelector('button[type="submit"]');
-      var originalBtnText = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Wird gesendet …'; }
       statusBox.className = 'form-status';
       statusBox.textContent = '';
-
-      var endpoint = 'https://formsubmit.co/ajax/' + form.getAttribute('action').split('/').pop();
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      })
-        .then(function (response) {
-          return response.text().then(function (raw) {
-            var data = null;
-            try { data = JSON.parse(raw); } catch (parseErr) { /* FormSubmit returned a non-JSON body */ }
-
-            if (!response.ok) {
-              console.error('Kontaktformular: FormSubmit antwortete mit Fehlerstatus', response.status, raw);
-              throw new Error('http-' + response.status);
-            }
-            if (data && (data.success === false || data.success === 'false')) {
-              console.error('Kontaktformular: FormSubmit hat die Anfrage abgelehnt', data);
-              throw new Error('rejected');
-            }
-            // HTTP-Status ok und keine explizite Ablehnung -> FormSubmit hat die Anfrage angenommen,
-            // selbst wenn der Antwort-Body nicht als JSON auswertbar war.
-            return data;
-          });
-        })
-        .then(function () {
-          statusBox.className = 'form-status success';
-          statusBox.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
-          form.reset();
-        })
-        .catch(function (err) {
-          console.error('Kontaktformular: Versand fehlgeschlagen', err);
-          statusBox.className = 'form-status error';
-          statusBox.innerHTML = '<span>Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:info@zinke-immo.de">info@zinke-immo.de</a>.</span>';
-        })
-        .finally(function () {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalBtnText; }
-        });
     });
   }
 
@@ -183,14 +154,18 @@ document.addEventListener('DOMContentLoaded', function () {
       var mapWrap = document.getElementById('map-embed');
       if (!mapWrap) return;
       var iframe = document.createElement('iframe');
-      iframe.src = 'https://www.google.com/maps?q=Am+Berg+19,+66333+V%C3%B6lklingen&output=embed';
+      iframe.src = 'https://www.google.com/maps?q=49.2403326,6.8629202&z=17&output=embed';
       iframe.loading = 'lazy';
       iframe.referrerPolicy = 'no-referrer-when-downgrade';
       iframe.title = 'Standort Zinke Immobilienverwaltung auf Google Maps';
       iframe.setAttribute('allowfullscreen', '');
+      var pinLabel = document.createElement('div');
+      pinLabel.className = 'map-pin-label';
+      pinLabel.textContent = 'Zinke Immobilienverwaltung';
       mapWrap.innerHTML = '';
       mapWrap.classList.add('is-loaded');
       mapWrap.appendChild(iframe);
+      mapWrap.appendChild(pinLabel);
     });
   }
 
