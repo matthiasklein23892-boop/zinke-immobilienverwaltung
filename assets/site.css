@@ -383,6 +383,8 @@ body.menu-open{overflow:hidden}
 .form-status{margin:18px 0 0;font-size:.92rem;min-height:1.4em}
 .form-status.success{color:#2F6B46;font-family:var(--serif);font-size:1.2rem;font-style:italic}
 .form-status.error{color:#B3473F}
+.form-status a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.form-status a[href^="tel:"]{white-space:nowrap}
 .anfahrt{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;text-align:left;padding:0}
 .anfahrt .txt{padding:70px 56px}
 .anfahrt h3{color:#F6F1E7;font-size:clamp(1.9rem,3vw,2.5rem);margin:20px 0 16px}

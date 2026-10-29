@@ -114,6 +114,21 @@
       status.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
       history.replaceState(null, '', location.pathname + location.hash);
     }
+    /* Versand im Hintergrund (FormSubmit-AJAX). Ist FormSubmit gestört (z. B. Fehler 521) oder lehnt ab, bleibt der
+       Besucher auf der Seite, seine Eingaben bleiben stehen und er bekommt E-Mail- und Telefon-Weg angeboten. */
+    var sb = form.querySelector('button[type="submit"]'), sbText = sb.textContent;
+    var link = function (href, text) { var a = d.createElement('a'); a.href = href; a.textContent = text; return a; };
+    var fail = function () {
+      var f = form.elements, tel = d.querySelector('a[href^="tel:"]'), mail = d.querySelector('a[href^="mailto:"]');
+      var adr = mail ? mail.getAttribute('href').replace(/^mailto:/, '').split('?')[0] : 'info@zinke-immo.de';
+      var body = 'Name: ' + f.name.value.trim() + '\nTelefon: ' + f.phone.value.trim() + '\nE-Mail: ' + f.email.value.trim() + '\n\n' + f.message.value.trim();
+      sb.disabled = false; sb.textContent = sbText;
+      status.className = 'form-status error'; status.textContent = '';
+      status.appendChild(d.createTextNode('Ihre Nachricht konnte gerade nicht übermittelt werden, unser Versanddienst ist kurzzeitig gestört. Ihre Eingaben bleiben erhalten. '));
+      status.appendChild(link('mailto:' + adr + '?subject=' + encodeURIComponent('Anfrage über zinke-immo.de') + '&body=' + encodeURIComponent(body), 'Nachricht per E-Mail senden'));
+      if (tel) { status.appendChild(d.createTextNode(' oder rufen Sie uns an: ')); status.appendChild(link(tel.getAttribute('href'), tel.textContent)); }
+      status.appendChild(d.createTextNode('.'));
+    };
     form.addEventListener('submit', function (e) {
       var ok = ['name', 'phone', 'email', 'message'].map(function (n) { return check(form.elements[n]); }).every(Boolean);
       var c = form.elements.consent, cok = c.checked;
@@ -122,8 +137,19 @@
         e.preventDefault(); status.className = 'form-status error';
         status.textContent = 'Bitte prüfen Sie Ihre Eingaben und die Datenschutz-Zustimmung.'; return;
       }
-      var sb = form.querySelector('button[type="submit"]'); sb.disabled = true; sb.textContent = 'Wird gesendet …';
+      sb.disabled = true; sb.textContent = 'Wird gesendet …';
       status.className = 'form-status'; status.textContent = '';
+      if (!window.fetch || !window.FormData) return;            // sehr alte Browser: normaler Versand wie bisher
+      e.preventDefault();
+      var ctl = window.AbortController ? new AbortController() : null, t = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, signal: ctl ? ctl.signal : undefined })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function (j) {
+          if (!j || String(j.success) !== 'true') return Promise.reject('abgelehnt');
+          clearTimeout(t); form.reset(); sb.disabled = false; sb.textContent = sbText;
+          status.className = 'form-status success'; status.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
+        })
+        .catch(function () { clearTimeout(t); fail(); });
     });
   }
 
