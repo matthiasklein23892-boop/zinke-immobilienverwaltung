@@ -153,6 +153,18 @@
     });
   }
 
+  /* ---------- Blog: Themenfilter (ohne JavaScript sind alle Beiträge sichtbar) ---------- */
+  var kat = d.querySelector('.kat');
+  if (kat) {
+    kat.hidden = false;
+    kat.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-kat]'); if (!b) return;
+      var k = b.getAttribute('data-kat');
+      $$('button[data-kat]', kat).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      $$('.posts > li[data-kat]').forEach(function (li) { li.hidden = !!k && li.getAttribute('data-kat') !== k; if (!li.hidden) li.classList.add('in'); });
+    });
+  }
+
   /* ---------- Google Maps erst nach Klick (wie bisher) ---------- */
   var mlb = d.getElementById('map-load-btn');
   if (mlb) mlb.addEventListener('click', function () {
