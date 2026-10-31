@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.zinke-immo.de/sitemap.xml
+Sitemap: https://zinke-immo.de/sitemap.xml
