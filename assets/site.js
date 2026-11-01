@@ -159,9 +159,9 @@
     var lsAbschnitte = $$('.ls-sec');
     var lsPruefen = function () {
       var r = lsAuswahl.getBoundingClientRect();
-      lsBar.classList.toggle('on', r.bottom < 90);
+      lsBar.classList.toggle('on', r.bottom < 185);
       var aktiv = '';
-      lsAbschnitte.forEach(function (s) { if (s.getBoundingClientRect().top < 160) aktiv = s.id; });
+      lsAbschnitte.forEach(function (s) { if (s.getBoundingClientRect().top < 200) aktiv = s.id; });
       $$('a', lsBar).forEach(function (a) { a.classList.toggle('aktiv', a.getAttribute('data-ziel') === aktiv); });
     };
     window.addEventListener('scroll', lsPruefen, { passive: true }); lsPruefen();

@@ -850,3 +850,38 @@ html.intro .hero-in>*{animation-play-state:paused}
 .blog-leer h2{font-size:clamp(2rem,3.4vw,3rem);max-width:20ch;margin:18px 0 22px}
 .blog-leer p{margin:0 0 1em;max-width:60ch}
 .blog-leer .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+
+/* Leistungen: Abschnittsband als unübersehbare Überschrift + größere Auswahlfelder */
+.ls-band{background:var(--navy);color:var(--paper);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);margin-bottom:0}
+.ls-band .wrap{display:flex;align-items:center;gap:28px;padding:34px 0}
+.ls-band i{font:italic 500 clamp(3rem,6vw,5rem)/1 var(--serif);color:var(--gold-l)}
+.ls-band>.wrap>div{flex:1;min-width:0}
+.ls-band-t{margin:0;font:600 clamp(2rem,4.4vw,3.6rem)/1.08 var(--serif);color:#fff;overflow-wrap:anywhere}
+.ls-band-s{margin:10px 0 0;font:600 .76rem/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l)}
+.ls-band a{flex:none;padding:12px 20px;border:1px solid rgba(246,241,231,.4);color:var(--paper);font:600 .68rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:background .3s,color .3s}
+.ls-band a:hover{background:var(--gold);color:var(--navy-d);border-color:var(--gold)}
+.ls-sec{scroll-margin-top:92px}
+.ls-sec>.ph{padding-top:80px}
+.ph:has(+ .ls-tabs){padding-bottom:40px}
+.ls-tabs{margin-top:0;padding-bottom:50px}
+.ls-hinweis{font-size:.82rem;color:var(--navy)}
+.ls-hinweis::after{content:"";display:block;width:60px;height:2px;background:var(--gold);margin:14px auto 0}
+.ls-tab{padding:38px 36px 40px;border-bottom-width:5px}
+.ls-tab i{font-size:3.2rem}
+.ls-tab b{font-size:clamp(1.7rem,2.3vw,2.2rem)}
+.ls-tab span{font-size:.76rem}
+.ls-tab em{position:static;grid-column:2;margin-top:12px;justify-self:start;font:600 .7rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--navy-d);background:var(--gold);padding:10px 16px}
+.ls-tab em::before{content:"Zum Text "}
+.ls-bar a{padding:13px 24px;font-size:.8rem}
+@media (max-width:1000px){
+  .ls-band .wrap{padding:24px 0;gap:16px;flex-wrap:wrap}
+  .ls-band i{font-size:2.6rem}
+  .ls-band a{width:100%;text-align:center}
+  .ls-tab{padding:26px 24px 28px}
+  .ls-tab i{font-size:2.5rem}
+}
+#weg.ls-sec,#miete.ls-sec,#sev.ls-sec{scroll-margin-top:168px}
+.ph:has(+ .ls-tabs){padding-bottom:10px}
+.ls-tabs{padding-bottom:40px}
+.ls-tab{padding:30px 34px 32px}
+@media (max-width:1000px){#weg.ls-sec,#miete.ls-sec,#sev.ls-sec{scroll-margin-top:84px}}
