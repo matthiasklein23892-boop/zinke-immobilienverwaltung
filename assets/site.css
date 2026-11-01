@@ -809,3 +809,7 @@ html.intro .hero-in>*{animation-play-state:paused}
 @media (max-width:1000px){.head--t .prose ul{columns:1}}
 .final .panel .sig{color:rgba(246,241,231,.62)}
 .final .panel--t .btn{line-height:1.6}
+/* Lange Knopftexte in der Kopfzeile der Leistungsseiten umbrechen statt abschneiden */
+.ph .cta .btn{white-space:normal;height:auto;min-height:52px;padding-top:14px;padding-bottom:14px;line-height:1.55;text-align:center}
+.ph .crumbs{flex-wrap:wrap;row-gap:6px;min-width:0}
+.ph .crumbs span:last-child{overflow-wrap:anywhere;min-width:0}
