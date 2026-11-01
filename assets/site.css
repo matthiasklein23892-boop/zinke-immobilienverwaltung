@@ -813,3 +813,40 @@ html.intro .hero-in>*{animation-play-state:paused}
 .ph .cta .btn{white-space:normal;height:auto;min-height:52px;padding-top:14px;padding-bottom:14px;line-height:1.55;text-align:center}
 .ph .crumbs{flex-wrap:wrap;row-gap:6px;min-width:0}
 .ph .crumbs span:last-child{overflow-wrap:anywhere;min-width:0}
+
+/* ---------- Seite „Leistungen“: Auswahl (drei große Felder), Sprungleiste, Abschnitte ---------- */
+.ls-tabs{padding:0 0 30px;margin-top:-30px;position:relative;z-index:2}
+.ls-hinweis{margin:0 0 22px;font:600 .74rem/1.6 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-t);text-align:center}
+.ls-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.ls-tab{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:18px;row-gap:6px;align-items:baseline;padding:30px 34px 32px;background:var(--navy);color:var(--paper);box-shadow:0 20px 40px -26px rgba(18,33,58,.7);border-bottom:3px solid var(--gold);transition:transform .35s var(--ease),background .35s,box-shadow .35s}
+.ls-tab:hover,.ls-tab:focus-visible{background:var(--navy-l);transform:translateY(-4px);box-shadow:0 28px 46px -24px rgba(18,33,58,.8)}
+.ls-tab i{grid-row:1 / span 2;font:italic 500 2.6rem/1 var(--serif);color:var(--gold-l)}
+.ls-tab b{font:600 clamp(1.45rem,2vw,1.85rem)/1.15 var(--serif);color:#fff;overflow-wrap:anywhere}
+.ls-tab span{font:500 .72rem/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(246,241,231,.72)}
+.ls-tab em{position:absolute;right:24px;top:22px;font:normal 1.3rem/1 var(--sans);color:var(--gold-l);transition:transform .35s var(--ease)}
+.ls-tab:hover em{transform:translateY(5px)}
+.ls-sec{scroll-margin-top:100px}
+.ls-sec>.ph{padding-top:110px}
+.ls-sec .ph h2.ls-title{font-size:clamp(2.4rem,4vw,3.5rem);line-height:1.06}
+.ls-sec+.ls-sec{border-top:1px solid var(--rule-g,var(--rule))}
+#weg,#miete,#sev{scroll-margin-top:96px}
+.ls-bar{position:fixed;z-index:230;left:var(--f);right:var(--f);top:calc(var(--f) + 90px);background:rgba(246,241,231,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--rule),0 12px 24px -20px rgba(18,33,58,.5);transform:translateY(-130%);opacity:0;visibility:hidden;transition:transform .45s var(--ease),opacity .3s,visibility .45s}
+.ls-bar.on{transform:none;opacity:1;visibility:visible}
+.ls-bar .wrap{width:min(1180px,100% - 112px);display:flex;align-items:center;gap:10px 14px;padding:10px 0;flex-wrap:wrap}
+.ls-bar span{font:600 .66rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-t);margin-right:6px}
+.ls-bar a{padding:10px 20px;background:var(--navy);color:#fff;font:600 .72rem/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid var(--gold);transition:background .3s,color .3s}
+.ls-bar a:hover{background:var(--navy-l)}
+.ls-bar a.aktiv{background:var(--gold);color:var(--navy-d)}
+@media (max-width:1000px){
+  .ls-tabs{margin-top:-10px}
+  .ls-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+  .ls-tab{padding:22px 24px 24px}
+  .ls-tab i{font-size:2.1rem}
+  .ls-bar{display:none}
+  .ls-sec>.ph{padding-top:80px}
+}
+/* Blog ohne Beiträge */
+.blog-leer{max-width:720px}
+.blog-leer h2{font-size:clamp(2rem,3.4vw,3rem);max-width:20ch;margin:18px 0 22px}
+.blog-leer p{margin:0 0 1em;max-width:60ch}
+.blog-leer .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}

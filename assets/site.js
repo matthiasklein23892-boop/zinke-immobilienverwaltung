@@ -153,6 +153,20 @@
     });
   }
 
+  /* ---------- Seite „Leistungen“: Sprungleiste erscheint, sobald die große Auswahl aus dem Bild ist; markiert den aktuellen Abschnitt ---------- */
+  var lsBar = d.getElementById('ls-bar'), lsAuswahl = d.getElementById('auswahl');
+  if (lsBar && lsAuswahl) {
+    var lsAbschnitte = $$('.ls-sec');
+    var lsPruefen = function () {
+      var r = lsAuswahl.getBoundingClientRect();
+      lsBar.classList.toggle('on', r.bottom < 90);
+      var aktiv = '';
+      lsAbschnitte.forEach(function (s) { if (s.getBoundingClientRect().top < 160) aktiv = s.id; });
+      $$('a', lsBar).forEach(function (a) { a.classList.toggle('aktiv', a.getAttribute('data-ziel') === aktiv); });
+    };
+    window.addEventListener('scroll', lsPruefen, { passive: true }); lsPruefen();
+  }
+
   /* ---------- Blog: Themenfilter (ohne JavaScript sind alle Beiträge sichtbar) ---------- */
   var kat = d.querySelector('.kat');
   if (kat) {
