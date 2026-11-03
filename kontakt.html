@@ -77,9 +77,9 @@
       <p class="lab">Kontaktformular</p>
       <h2>Jetzt Nachricht senden</h2>
       <p class="hint">Alle mit * markierten Felder sind erforderlich.</p>
-      <form id="contact-form" novalidate action="https://formsubmit.co/info@zinke-immo.de" method="POST">
-        <input type="hidden" name="_subject" value="Neue Anfrage über das Kontaktformular – zinke-immo.de"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_autoresponse" value="Vielen Dank für Ihre Nachricht an Zinke Immobilienverwaltung! Wir haben Ihre Anfrage erhalten und melden uns so schnell wie möglich persönlich bei Ihnen zurück."><input type="hidden" name="_next" value="https://www.zinke-immo.de/kontakt.html?gesendet=1#kontakt-form">
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <form id="contact-form" novalidate action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="b8b73319-32a2-4927-89a4-ccfb070412c9"><input type="hidden" name="subject" value="Neue Anfrage über das Kontaktformular – zinke-immo.de"><input type="hidden" name="from_name" value="Kontaktformular zinke-immo.de"><input type="hidden" name="redirect" value="https://zinke-immo.de/kontakt.html?gesendet=1#kontakt-form">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="f-row">
           <div class="field"><label for="name">Name <span class="req">*</span></label><input type="text" id="name" name="name" placeholder="Ihr vollständiger Name" autocomplete="name" required><span class="field-error">Bitte geben Sie Ihren Namen ein.</span></div>
           <div class="field"><label for="phone">Telefonnummer <span class="req">*</span></label><input type="tel" id="phone" name="phone" placeholder="Ihre Telefonnummer" autocomplete="tel" required><span class="field-error">Bitte geben Sie eine gültige Telefonnummer ein.</span></div>

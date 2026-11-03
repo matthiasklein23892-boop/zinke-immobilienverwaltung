@@ -114,7 +114,7 @@
       status.textContent = 'Ich danke Ihnen! Wir werden uns so schnell wie möglich bei Ihnen melden.';
       history.replaceState(null, '', location.pathname + location.hash);
     }
-    /* Versand im Hintergrund (FormSubmit-AJAX). Ist FormSubmit gestört (z. B. Fehler 521) oder lehnt ab, bleibt der
+    /* Versand im Hintergrund (Web3Forms-AJAX). Ist der Dienst gestört oder lehnt ab, bleibt der
        Besucher auf der Seite, seine Eingaben bleiben stehen und er bekommt E-Mail- und Telefon-Weg angeboten. */
     var sb = form.querySelector('button[type="submit"]'), sbText = sb.textContent;
     var link = function (href, text) { var a = d.createElement('a'); a.href = href; a.textContent = text; return a; };
@@ -142,7 +142,7 @@
       if (!window.fetch || !window.FormData) return;            // sehr alte Browser: normaler Versand wie bisher
       e.preventDefault();
       var ctl = window.AbortController ? new AbortController() : null, t = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
-      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, signal: ctl ? ctl.signal : undefined })
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, signal: ctl ? ctl.signal : undefined })
         .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
         .then(function (j) {
           if (!j || String(j.success) !== 'true') return Promise.reject('abgelehnt');
