@@ -889,3 +889,6 @@ html.intro .hero-in>*{animation-play-state:paused}
 .ls-hinweis{margin-bottom:34px}
 .ls-tabs{padding-top:12px;padding-bottom:64px}
 @media (max-width:1000px){.ph:has(+ .ls-tabs){padding-bottom:44px}.ls-hinweis{margin-bottom:26px}.ls-tabs{padding-bottom:44px}}
+.ls-tab b{overflow-wrap:break-word;hyphens:manual}
+.ls-tab{column-gap:14px}
+.ls-tab b{font-size:clamp(1.45rem,1.75vw,1.8rem)}
