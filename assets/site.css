@@ -885,3 +885,7 @@ html.intro .hero-in>*{animation-play-state:paused}
 .ls-tabs{padding-bottom:40px}
 .ls-tab{padding:30px 34px 32px}
 @media (max-width:1000px){#weg.ls-sec,#miete.ls-sec,#sev.ls-sec{scroll-margin-top:84px}}
+.ph:has(+ .ls-tabs){padding-bottom:72px}
+.ls-hinweis{margin-bottom:34px}
+.ls-tabs{padding-top:12px;padding-bottom:64px}
+@media (max-width:1000px){.ph:has(+ .ls-tabs){padding-bottom:44px}.ls-hinweis{margin-bottom:26px}.ls-tabs{padding-bottom:44px}}
